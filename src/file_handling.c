@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 21:45:17 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/01 13:29:13 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/01 13:56:41 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	open_infile(char *filename)
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
-		return (-1);
 	}
 	return (fd);
 }
@@ -34,14 +33,13 @@ int	open_outfile(char *filename)
 {
 	int	fd;
 
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 600);
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		ft_putstr_fd(filename, 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
-		return (-1);
 	}
 	return (fd);
 }
