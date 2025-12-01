@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:49 by abisani           #+#    #+#             */
-/*   Updated: 2025/11/29 00:20:05 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/01 15:57:28 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@
 # include <string.h>
 # include "../libft/libft.h"
 
-// typedef struct s_cmd_data
-// {
-// 	int		argc;
-// 	char	**argv;
-// 	char	**env;
-// 	int		heredoc;
-// 	int		n_cmds;
-// }				t_cmd_data;
+typedef struct s_data
+{
+	int		argc;
+	char	**argv;
+	char	**env;
+	int		child_n;
+	int		n_cmds;
+	int		fd_in;
+	int		fd_out;
+}				t_data;
 
 // Utils
 void	free_array(char **array);
