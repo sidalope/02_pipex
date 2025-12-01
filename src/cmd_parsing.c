@@ -6,13 +6,13 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:34:25 by abisani           #+#    #+#             */
-/*   Updated: 2025/11/29 00:14:54 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/01 21:04:35 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**parse_cmd(char *cmd_str)
+static char	**parse_cmd(char *cmd_str)
 {
 	char	**cmd_argv;
 

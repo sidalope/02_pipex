@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:49 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/01 15:57:28 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/01 20:41:30 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 	char	**env;
 	int		child_n;
 	int		n_cmds;
+	int		pipe[2];
 	int		fd_in;
 	int		fd_out;
 }				t_data;
