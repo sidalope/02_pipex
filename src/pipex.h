@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:49 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/02 22:51:50 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 23:15:14 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	error_out(char *error_msg, t_data *data);
 void	free_array(char **array);
 
 // File handling
-int	open_infile(char *filename, t_data *data);
-int	open_outfile(char *filename, t_data *data);
+int		open_infile(char *filename, t_data *data);
+int		open_outfile(char *filename, t_data *data);
 
 // Cmd parsing and execution
 void	execute_cmd(char *cmd, char **envp);
