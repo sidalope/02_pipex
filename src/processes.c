@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 23:18:23 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/01 21:36:10 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 20:31:27 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 // Redirect any two fds to stdin/stdout
 // TODO double check resource closing code
-void	redirect_fds(int infile, int outfile)
+static void	redirect_fds(int infile, int outfile)
 {
 	if (dup2(infile, STDIN_FILENO) == -1)
 	{
 		error_out(strerror(errno));
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	close(infile);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
 		error_out(strerror(errno));
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	close(outfile);
 }
 
 // Check which child is current and execute behaviour
-void	execute_child(t_data *data)//, int pipe_fds[2])
+static void	execute_child(t_data *data)
 {
 	if (data->child_n == 0)
 		redirect_fds(data->fd_in, data->pipe[1]);
@@ -45,10 +45,7 @@ void	execute_child(t_data *data)//, int pipe_fds[2])
 }
 
 // fork n_cmds number of children
-// close pipe ends
-// wait for all children
-// return last child's exit status
-void	parent_process(t_data *data)
+static void	fork_children(t_data *data)
 {
 	int		pid;
 
@@ -61,10 +58,35 @@ void	parent_process(t_data *data)
 		else if (pid == 0)
 			execute_child(data);
 		else
-		{
-			close(data->pipe[0]);
-			close(data->pipe[1]);
-		}
+			data->pids[data->child_n] = pid;
 		data->child_n++;
 	}
+	data->child_n--;
+}
+
+// close pipe ends?
+// wait for all children
+// return last child's exit status
+int	parent_process(t_data *data)
+{
+	int		i;
+	int		wstatus;
+	int		exit_status;
+
+	i = 0;
+	wstatus = -1;
+	fork_children(data);
+	close(data->pipe[0]);
+	close(data->pipe[1]);
+	while (i <= data->child_n)
+	{
+		waitpid(data->pids[i], &wstatus, 0);
+		if (i == data->child_n)
+		{
+			if (WIFEXITED(wstatus))
+				exit_status = WEXITSTATUS(wstatus);
+		}
+		i++;
+	}
+	return (exit_status);
 }

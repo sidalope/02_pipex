@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:52 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/01 20:54:46 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:42:15 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,10 @@ static void	init(int argc, char *argv[], char *env[], t_data *data)
 
 int	main(int argc, char *argv[], char *env[])
 {
-	char	*cmd;
+	t_data	data;
 
 	if (argc != 5)
 		return (ft_printf("Usage: infile \"cmd1\" \"cmd2\" outfile\n"), 1);
-	cmd = argv[2];
-	cmd = find_command(cmd, env);
-	if (!cmd)
-		return (1);
-	ft_printf(cmd);
-	ft_printf("\n");
-
-	ft_printf("infile fd: %i\n", open_infile(argv[1]));
-	ft_printf("outfile fd: %i\n", open_outfile(argv[4]));
-	return (0);
+	init(argc, argv, env, &data);
+	return (parent_process(&data));
 }

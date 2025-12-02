@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:49 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/01 20:41:30 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:39:40 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ typedef struct s_data
 	int		pipe[2];
 	int		fd_in;
 	int		fd_out;
+	int		pids[2];
 }				t_data;
+
+// Error handling
+void	error_out(char *error_msg);
 
 // Utils
 void	free_array(char **array);
@@ -40,10 +44,10 @@ void	free_array(char **array);
 int		open_infile(char *filename);
 int		open_outfile(char *filename);
 
-// Find a command
-char	*find_command(char *cmd, char **env);
-
-// Command parsing
+// Cmd parsing and execution
 void	execute_cmd(char *cmd, char **envp);
+
+// Process execution
+int		parent_process(t_data *data);
 
 #endif
