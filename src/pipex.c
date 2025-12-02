@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:52 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/02 22:02:10 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 22:51:15 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	init(int argc, char *argv[], char *env[], t_data *data)
 	data->pipe[1] = -1;
 	if (pipe(data->pipe) == -1)
 		error_out(strerror(errno), data);
-	data->fd_in = open_infile(argv[1]);
-	data->fd_out = open_outfile(argv[4]);
+	data->fd_in = open_infile(argv[1], data);
+	data->fd_out = open_outfile(argv[4], data);
 	data->pids[0] = -1;
 	data->pids[1] = -1;
 }
