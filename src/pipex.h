@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:49 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/02 21:39:40 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:52:43 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data
 }				t_data;
 
 // Error handling
-void	error_out(char *error_msg);
+void	error_out(char *error_msg, t_data *data);
 
 // Utils
 void	free_array(char **array);

@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 23:18:23 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/02 20:31:27 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 22:06:52 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,13 @@
 
 // Redirect any two fds to stdin/stdout
 // TODO double check resource closing code
-static void	redirect_fds(int infile, int outfile)
+static void	redirect_fds(int infile, int outfile, t_data *data)
 {
 	if (dup2(infile, STDIN_FILENO) == -1)
-	{
-		error_out(strerror(errno));
-		exit(EXIT_FAILURE);
-	}
+		error_out(strerror(errno), data);
 	close(infile);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
-	{
-		error_out(strerror(errno));
-		exit(EXIT_FAILURE);
-	}
+		error_out(strerror(errno), data);
 	close(outfile);
 }
 
@@ -34,9 +28,9 @@ static void	redirect_fds(int infile, int outfile)
 static void	execute_child(t_data *data)
 {
 	if (data->child_n == 0)
-		redirect_fds(data->fd_in, data->pipe[1]);
+		redirect_fds(data->fd_in, data->pipe[1], data);
 	else if (data->child_n == data->n_cmds - 1)
-		redirect_fds(data->pipe[0], data->fd_out);
+		redirect_fds(data->pipe[0], data->fd_out, data);
 	close(data->pipe[0]);
 	close(data->pipe[1]);
 	close(data->fd_in);
@@ -54,7 +48,7 @@ static void	fork_children(t_data *data)
 	{
 		pid = fork();
 		if (pid == -1)
-			error_out(strerror(errno));
+			error_out(strerror(errno), data);
 		else if (pid == 0)
 			execute_child(data);
 		else
@@ -64,7 +58,7 @@ static void	fork_children(t_data *data)
 	data->child_n--;
 }
 
-// close pipe ends?
+// close pipe ends
 // wait for all children
 // return last child's exit status
 int	parent_process(t_data *data)
@@ -75,6 +69,7 @@ int	parent_process(t_data *data)
 
 	i = 0;
 	wstatus = -1;
+	exit_status = EXIT_FAILURE;
 	fork_children(data);
 	close(data->pipe[0]);
 	close(data->pipe[1]);
