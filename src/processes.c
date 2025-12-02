@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 23:18:23 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/02 22:06:52 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 22:39:37 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	parent_process(t_data *data)
 	fork_children(data);
 	close(data->pipe[0]);
 	close(data->pipe[1]);
+	close(data->fd_in);
+	close(data->fd_out);
 	while (i <= data->child_n)
 	{
 		waitpid(data->pids[i], &wstatus, 0);
