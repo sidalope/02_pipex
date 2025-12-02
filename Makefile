@@ -6,7 +6,7 @@
 #    By: abisani <abisani@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 11:37:56 by abisani           #+#    #+#              #
-#    Updated: 2025/12/02 21:39:02 by abisani          ###   ########.fr        #
+#    Updated: 2025/12/02 23:21:22 by abisani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = pipex
 LIBFT = libft/libft.a
 
 SRC_DIR = src
-SRC_FILES = pipex.c file_handling.c env_parsing.c processes.c
+SRC_FILES = pipex.c file_handling.c cmd_parsing.c processes.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 OBJ = $(SRC:.c=.o)
