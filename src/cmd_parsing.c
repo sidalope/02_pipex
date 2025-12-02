@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_parsing.c                                      :+:      :+:    :+:   */
+/*   cmd_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:54 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/02 20:32:53 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/02 23:21:03 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	execute_cmd(char *cmd_str, char **env)
 	cmd_path = find_command(cmd_argv[0], env);
 	if (!cmd_path)
 	{
-		ft_putstr_fd("Command not found\n", 2);
+		ft_putstr_fd("command not found: ", 2);
 		ft_putstr_fd(cmd_argv[0], 2);
 		ft_putstr_fd("\n", 2);
 		free_array(cmd_argv);
