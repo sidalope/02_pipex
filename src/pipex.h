@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abisiani <abisiani@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:49 by abisani           #+#    #+#             */
-/*   Updated: 2025/12/02 23:15:14 by abisani          ###   ########.fr       */
+/*   Updated: 2025/12/15 12:54:48 by abisiani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_data
 void	error_out(char *error_msg, t_data *data);
 
 // Utils
-void	free_array(char **array);
+// void	free_array(char **array);
 
 // File handling
 int		open_infile(char *filename, t_data *data);

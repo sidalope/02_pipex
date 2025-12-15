@@ -61,31 +61,31 @@ echo "--- ERRORS ---"
 echo
 
 echo "Non-existent input file"
-./pipex no_such_file "cat" "wc" outfile 2>/dev/null
-< no_such_file cat | wc > expected 2>/dev/null
+./pipex no_such_file "cat" "wc" outfile
+< no_such_file cat | wc > expected
 echo
 
 echo "First command not found"
-./pipex infile "invalid_cmd_first" "wc -l" outfile 2>/dev/null
-< infile invalid_cmd_first | wc -l > expected 2>/dev/null
+./pipex infile "invalid_cmd_first" "wc -l" outfile
+< infile invalid_cmd_first | wc -l > expected
 echo
 
 echo "Permission denied file"
 touch deny_file
 chmod 000 deny_file
-./pipex deny_file "cat" "wc" outfile 2>/dev/null
-< deny_file cat | wc > expected 2>/dev/null
+./pipex deny_file "cat" "wc" outfile
+< deny_file cat | wc > expected
 chmod 600 deny_file
 rm -f deny_file
 echo
 
 echo "Successful execution"
-./pipex infile "cat" "wc -l" outfile >/dev/null 2>&1
+./pipex infile "cat" "wc -l" outfile >/dev/null
 echo "Exit code: $?"
 echo
 
 echo "Command not found as last command"
-./pipex infile "cat" "invalid_command_xyz" outfile >/dev/null 2>&1
+./pipex infile "cat" "invalid_command_xyz" outfile >/dev/null
 echo "Exit code: $?"
 echo
 
