@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abisani <abisani@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 23:18:23 by abisani           #+#    #+#             */
-/*   Updated: 2026/02/03 16:16:45 by abisani          ###   ########.fr       */
+/*   Created: Invalid Date        by              +#+  #+#    #+#             */
+/*   Updated: 2026/02/04 02:29:14 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "pipex.h"
 
 // Redirect any two fds to stdin/stdout
-// TODO double check resource closing code
 static void	redirect_fds(int infile, int outfile, t_data *data)
 {
 	if (dup2(infile, STDIN_FILENO) == -1)
@@ -25,6 +25,7 @@ static void	redirect_fds(int infile, int outfile, t_data *data)
 }
 
 // Check which child is current and execute behaviour
+// Add generic redirect_fds for bonus
 static void	execute_child(t_data *data)
 {
 	if (data->child_n == 0)
