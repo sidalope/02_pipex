@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   processes.c                                        :+:      :+:    :+:   */
+/*   processes_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abisani <abisani@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 23:18:23 by abisani           #+#    #+#             */
-/*   Updated: 2026/02/03 16:16:45 by abisani          ###   ########.fr       */
+/*   Updated: 2026/02/04 00:49:00 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
+
+void	close_all_pipes(t_data *data)
+{
+	int		i;
+
+	i = 0;
+	if (!data->pipes)
+		return ;
+	while (i < data->n_pipes)
+	{
+		if (data->pipes[i])
+		{
+			close(data->pipes[i][0]);
+			close(data->pipes[i][1]);
+		}
+		i++;
+	}
+}
 
 // Redirect any two fds to stdin/stdout
-// TODO double check resource closing code
 static void	redirect_fds(int infile, int outfile, t_data *data)
 {
 	if (dup2(infile, STDIN_FILENO) == -1)
