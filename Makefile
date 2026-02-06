@@ -56,3 +56,8 @@ fclean: clean
 	@make -C libft fclean
 
 re: fclean all
+
+re_bonus: fclean bonus
+
+test:
+	./tests.sh

@@ -6,7 +6,7 @@
 /*   By: abisani <abisani@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 23:18:23 by abisani           #+#    #+#             */
-/*   Updated: 2026/02/04 00:49:00 by abisani          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:12:30 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,15 @@ static void	redirect_fds(int infile, int outfile, t_data *data)
 static void	execute_child(t_data *data)
 {
 	if (data->child_n == 0)
-		redirect_fds(data->fd_in, data->pipe[1], data);
+		redirect_fds(data->fd_in, data->pipes[0][1], data);
 	else if (data->child_n == data->n_cmds - 1)
-		redirect_fds(data->pipe[0], data->fd_out, data);
-	close(data->pipe[0]);
-	close(data->pipe[1]);
+		redirect_fds(data->pipes[data->child_n - 1][0], data->fd_out, data);
+	else
+		redirect_fds(data->pipes[data->child_n - 1][0], data->pipes[data->child_n][1], data);
+	close_all_pipes(data);
 	close(data->fd_in);
 	close(data->fd_out);
-	execute_cmd(data->argv[data->child_n + 2], data->env);
+	execute_cmd(data->argv[data->child_n + data->cmd_offset], data->env);
 }
 
 // fork n_cmds number of children
@@ -88,8 +89,7 @@ int	parent_process(t_data *data)
 	wstatus = -1;
 	exit_status = EXIT_FAILURE;
 	fork_children(data);
-	close(data->pipe[0]);
-	close(data->pipe[1]);
+	close_all_pipes(data);
 	close(data->fd_in);
 	close(data->fd_out);
 	while (i <= data->child_n)

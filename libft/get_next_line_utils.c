@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abisani <abisani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abisani <abisani@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:48:33 by abisani           #+#    #+#             */
-/*   Updated: 2025/09/22 15:14:57 by abisani          ###   ########.fr       */
+/*   Updated: 2026/02/06 11:35:36 by abisani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,6 @@ char	*ft_strchr(const char *s, int c)
 	if ((char) c == '\0')
 		return ((char *)(s += i));
 	return (NULL);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	int	length;
-
-	length = 0;
-	if (!s)
-		return (0);
-	while (s[length])
-		length++;
-	return (length);
 }
 
 char	*ft_gnl_strjoin(char **s1, char *s2)

@@ -1,4 +1,4 @@
-;/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                      :+:      :+:    :+:   */
@@ -28,7 +28,7 @@ static void	create_pipes(t_data *data)
 		i++;
 	}
 }
-
+// error_out(strerror(errno), data); ?
 static void	init_normal(t_data *data)
 {
 	data->cmd_offset = 2;
@@ -38,7 +38,6 @@ static void	init_normal(t_data *data)
 	data->pids = malloc(data->n_cmds * sizeof(int));
 	if (!data->pids)
 		error_out("Error: Malloc failure", data);
-		// error_out(strerror(errno), data); ?
 	data->fd_in = open_infile(data->argv[1]);
 	data->fd_out = open_outfile(data->argv[data->argc - 1], data);
 }
